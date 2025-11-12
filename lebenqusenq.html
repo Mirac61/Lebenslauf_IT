@@ -9,18 +9,17 @@
 <body>
 <div class="hülle">
 
-  <!-- Kopfbereich -->
-  <header class="box" style="margin-bottom:20px">
-    <div style="display:flex;gap:20px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap">
-      <div>
-        <h1 style="font-size:40px;letter-spacing:-.5px;margin:0 0 6px">Mirac Sancak</h1>
-        <p class="blass" style="margin:0">Student Softwaretechnik, 3. Semester</p>
+  <header class="box">
+    <div class="header-row">
+      <div class="header-name">
+        <h1>Mirac Sancak</h1>
+        <p class="blass">Student Softwaretechnik, 3. Semester</p>
       </div>
-      <div style="display:flex;gap:8px;align-items:center">
+      <div>
         <button id="themaKnopf" class="knopf" aria-label="Theme umschalten">🌓</button>
       </div>
     </div>
-    <nav class="marken" style="margin-top:16px">
+    <nav class="marken">
       <a class="marke" href="mailto:mirac.i.sancak@gmail.com">E-Mail</a>
       <a class="marke" href="tel:+491756707464">Telefon</a>
       <a class="marke" href="https://www.linkedin.com/in/mirac-sancak-47917238b">LinkedIn</a>
@@ -29,42 +28,38 @@
     </nav>
   </header>
 
-  <!-- Hauptbereich -->
   <main class="gitter">
-    <!-- Bildung -->
     <section class="box feld--bildung">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-      <h2 class="titel">Bildungsweg</h2>
+      <div class="section-head">
+        <h2 class="titel">Bildungsweg</h2>
       </div>
-      <ul class="liste" style="margin-top:12px">
-        <li><div class="ltitel">Hochschule Esslingen</div><div class="ltext">Softwaretechnik</div><div class="ltext">2022 – heute · Esslingen</div></li>
-        <li><div class="ltitel">Max-Eyth-Schule</div><div class="ltext">FHR IT & Kommunikation</div><div class="ltext">2022 – 2024 · Kirchheim u. T.</div></li>
-        <li><div class="ltitel">Realschule Plochingen</div><div class="ltext">Mittlere Reife · IT</div><div class="ltext">2017 – 2022 · Plochingen</div></li>
+      <ul class="liste mt-12">
+        <li><div class="ltitel">Hochschule Esslingen</div><div class="ltext">Softwaretechnik</div><div class="ltext">2022 – heute | Esslingen</div></li>
+        <li><div class="ltitel">Max-Eyth-Schule</div><div class="ltext">FHR IT & Kommunikation</div><div class="ltext">2022 – 2024 | Kirchheim u. T.</div></li>
+        <li><div class="ltitel">Realschule Plochingen</div><div class="ltext">Mittlere Reife · IT</div><div class="ltext">2017 – 2022 | Plochingen</div></li>
         <li><div class="ltitel">Grundschule (Burgschule) Plochingen</div><div class="ltext">2013 – 2017 · Plochingen</div></li>
       </ul>
     </section>
 
     <section class="box feld--sprachen">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-        <h2 class="titel" style="margin-bottom:0">Sprachen & Zertifikate</h2>
-
-        <button class="knopf" data-toggle="#sprachen">Ausblenden</button>
+      <div class="section-head">
+        <h2 class="titel">Sprachen & Zertifikate</h2>
+        <button class="knopf" data-toggle="#sprachen" aria-controls="sprachen" aria-expanded="true">Ausblenden</button>
       </div>
-
-      <ul id="sprachen" class="liste" style="margin-top:12px">
+      <ul id="sprachen" class="liste mt-12">
         <li><div class="ltitel">Deutsch</div><div class="ltext">C2</div></li>
         <li><div class="ltitel">Englisch</div><div class="ltext">C1</div></li>
         <li><div class="ltitel">Türkisch</div><div class="ltext">fließend</div></li>
         <li><div class="ltitel">Zertifikate</div><div class="ltext">Arduino Programmierung</div></li>
       </ul>
     </section>
-    <!-- Fähigkeiten -->
+
     <section class="box feld--faehig">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-        <h2 class="titel" style="margin-bottom:0">Fähigkeiten</h2>
-        <button class="knopf" data-toggle="#faehigkeiten">Ausblenden</button>
+      <div class="section-head">
+        <h2 class="titel">Fähigkeiten</h2>
+        <button class="knopf" data-toggle="#faehigkeiten" aria-controls="faehigkeiten" aria-expanded="true">Ausblenden</button>
       </div>
-      <ul id="faehigkeiten" class="liste" style="margin-top:12px">
+      <ul id="faehigkeiten" class="liste mt-12">
         <li><div class="ltitel">Programmierung</div><div class="ltext">C++, C#, Python, HTML, CSS, JS</div></li>
         <li><div class="ltitel">Daten & Systeme</div><div class="ltext">SQL, DB2, Git, macOS, Linux, Windows</div></li>
         <li><div class="ltitel">Soft Skills</div><div class="ltext">kreativ, teamorientiert, eigenständig</div></li>
@@ -72,26 +67,26 @@
       </ul>
     </section>
 
-    <!-- Projekte -->
     <section class="box feld--projekte">
-      <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-        <h2 class="titel" style="margin-bottom:0">Projekte</h2>
+      <div class="section-head">
+        <h2 class="titel">Projekte</h2>
+        <label for="projektFilter" class="visually-hidden">Projekte filtern</label>
         <input id="projektFilter" class="eingabe" type="search" placeholder="Filtern…">
-        <button class="knopf" data-toggle="#projekte">Ausblenden</button>
+        <button class="knopf" data-toggle="#projekte" aria-controls="projekte" aria-expanded="true">Ausblenden</button>
       </div>
-      <div id="projekte" style="display:grid;gap:12px;margin-top:12px">
-        <a class="projekt" data-tags="c++ spiel console" href="https://github.com/Mirac61/Schiffe-Versenken">Schiffe Versenken | C++</a>
-        <a class="projekt" data-tags="c#  kalender" href="https://github.com/Mirac61/Projekt-Terminkalender">Terminkalender | C#</a>
-        <a class="projekt" data-tags="python simulation" href="https://github.com/Mirac61/Modellbilldung_und_Simulation">Modellbildung & Simulation | Python</a>
-        <a class="projekt" data-tags="html css js" href="https://github.com/Mirac61/Lebenslauf_IT">Internet Technologien | HTML/CSS</a>
+      <div id="projekte" class="projekte-grid">
+        <a class="projekt" data-tags="c++ spiel console" href="https://github.com/Mirac61/Schiffe-Versenken" target="_blank" rel="noopener noreferrer">Schiffe Versenken | C++</a>
+        <a class="projekt" data-tags="c# kalender" href="https://github.com/Mirac61/Projekt-Terminkalender" target="_blank" rel="noopener noreferrer">Terminkalender | C#</a>
+        <a class="projekt" data-tags="python simulation" href="https://github.com/Mirac61/Modellbilldung_und_Simulation" target="_blank" rel="noopener noreferrer">Modellbildung & Simulation | Python</a>
+        <a class="projekt" data-tags="html css js" href="https://github.com/Mirac61/Lebenslauf_IT" target="_blank" rel="noopener noreferrer">Internet Technologien | HTML/CSS</a>
       </div>
     </section>
   </main>
 
-  <!-- Fuß -->
   <footer class="fuß">© 2025 Mirac Sancak</footer>
 </div>
+
 <script src="app.js"></script>
+
 </body>
 </html>
-

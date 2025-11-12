@@ -1,72 +1,71 @@
-/* ==== Grundwerte ==== */
+/* globaler Selektor. Definitionen für das Grunddesign */
 :root {
-  --hintergrund: url("https://images.unsplash.com/photo-1557683316-973673baf926?w=1920&auto=format&q=80");
   --text: #1a1a1a;
   --grau: #5a6777;
-  --box: rgba(255, 255, 255, 0.85); /* leicht durchsichtig */
   --rand: #e5e7eb;
   --akzent: #667eea;
   --radius: 14px;
   --abstand: 20px;
   --t: 0.25s ease;
+  --page-bg: linear-gradient(180deg, #f7f7f7 0%, #f0e8dc 100%);
+  --surface: rgba(255, 255, 255, 0.5);
 }
+
+/* Vordefinition für das Dark Theme */
 html[data-theme="dark"] {
+  --page-bg: linear-gradient(180deg, #0f0f13 0%, #1a2238 100%);
+  --surface: rgba(21, 24, 30, 0.49);
   --text: #e5e5e5;
   --grau: #a0aec0;
-  --box: rgba(21, 24, 30, 0.85);
   --rand: #2a2f36;
   --akzent: #8da2fb;
 }
 
-/* ==== Basis ==== */
+/* Das Grunddesign für alle Elemente */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 img { max-width: 100%; display: block; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
-  color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
   padding: 24px;
-  background:
-          linear-gradient(to bottom, rgba(255,255,255,0.75), rgba(255,255,255,0.75)),
-          var(--hintergrund) center/cover fixed no-repeat;
-  transition: background-color var(--t), color var(--t);
-}
-html[data-theme="dark"] body {
-  background:
-          linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-          var(--hintergrund) center/cover fixed no-repeat;
+  color: var(--text);
+  background: var(--page-bg);
+  transition: background .25s ease, color .25s ease; /* weiches Umschalten */
 }
 
-/* ==== Layout ==== */
 .hülle { max-width: 1100px; margin: auto; }
-.gitter{
-  display:grid;
-  gap:var(--abstand);
-  grid-template-columns:1fr 1fr;
+
+.gitter {
+  display: grid;
+  gap: var(--abstand);
+  grid-template-columns: 1fr 1fr;
   grid-template-areas:
     "bildung faehig"
     "sprachen projekte";
 }
 @media (max-width:900px){
-  .gitter{ grid-template-areas: "bildung" "faehig" "sprachen" "projekte"; grid-template-columns:1fr; }
+  .gitter {
+    grid-template-areas: "bildung" "faehig" "sprachen" "projekte";
+    grid-template-columns: 1fr;
+  }
 }
 .feld--bildung { grid-area: bildung; }
 .feld--faehig  { grid-area: faehig; }
 .feld--sprachen{ grid-area: sprachen; }
 .feld--projekte{ grid-area: projekte; }
 
-/* ==== Elemente ==== */
 .box {
-  background: var(--box);
+  background: var(--surface);
   border: 1px solid var(--rand);
   border-radius: var(--radius);
   padding: 24px;
   transition: transform var(--t), border-color var(--t);
 }
 .box:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px); /*hebt die Box leicht an*/
   border-color: color-mix(in srgb, var(--rand), var(--akzent) 30%);
 }
 
@@ -82,7 +81,7 @@ html[data-theme="dark"] body {
   transition: background-color var(--t), border-color var(--t), transform var(--t);
 }
 .knopf:hover {
-  background: color-mix(in srgb, var(--box), var(--akzent) 10%);
+  background: color-mix(in srgb, var(--surface), var(--akzent) 10%);
   transform: translateY(-1px);
 }
 .knopf--akzent {
@@ -97,7 +96,7 @@ html[data-theme="dark"] body {
   padding: 10px 14px;
   border-radius: 999px;
   border: 1px solid var(--rand);
-  background: var(--box);
+  background: var(--surface);
   color: var(--text);
   outline: none;
   transition: border-color var(--t);
@@ -108,15 +107,23 @@ html[data-theme="dark"] body {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-top: 16px;
 }
 .marke {
   padding: 10px 14px;
   border-radius: 999px;
   border: 1px solid var(--rand);
-  background: var(--box);
+  background: var(--surface);
   color: var(--text);
+  text-decoration: none; /* Unterstrich entfernen */
+  transition: background-color var(--t), border-color var(--t), color var(--t);
 }
 
+.marke:hover {
+  background: color-mix(in srgb, var(--surface), var(--akzent) 15%);
+  border-color: var(--akzent);
+  color: var(--akzent);
+}
 .titel {
   font-size: 24px;
   font-weight: 700;
@@ -126,23 +133,22 @@ html[data-theme="dark"] body {
 }
 .blass { color: var(--grau); }
 
-/* ==== Listen ==== */
 .liste {
   list-style: none;
   display: grid;
   gap: 16px;
   padding-left: 0;
+  margin-top: 12px;
 }
 .ltitel { font-weight: 600; }
 .ltext { color: var(--grau); font-size: 14px; }
 
-/* ==== Projekt ==== */
 .projekt {
   display: block;
   padding: 14px 16px;
   border-radius: 10px;
   border: 1px solid var(--rand);
-  background: var(--box);
+  background: var(--surface);
   color: var(--text);
   text-decoration: none;
   transition: transform var(--t), border-color var(--t), background-color var(--t);
@@ -150,10 +156,9 @@ html[data-theme="dark"] body {
 .projekt:hover {
   transform: translateX(6px);
   border-color: var(--akzent);
-  background: color-mix(in srgb, var(--box), var(--akzent) 8%);
+  background: color-mix(in srgb, var(--surface), var(--akzent) 8%);
 }
 
-/* ==== Fußzeile ==== */
 .fuß {
   text-align: center;
   color: var(--grau);
@@ -161,9 +166,47 @@ html[data-theme="dark"] body {
   padding: 16px;
 }
 
-/* ==== Dienst ==== */
+.header-row {
+  display:flex;
+  gap:20px;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+.header-name h1 { font-size:40px; letter-spacing:-.5px; margin:0 0 6px; }
+.header-name .blass { margin:0; }
+
+.section-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.section-head .titel { margin-bottom:0; }
+
+.mt-12 { margin-top:12px; }
+.projekte-grid { display:grid; gap:12px; margin-top:12px; }
+
+.visually-hidden {
+  position:absolute!important;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  white-space:nowrap;
+  border:0;
+}
+
 .versteckt { display: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
+}
+
+/* Abstand zwischen Kopf und erstem Abschnitt */
+header.box {
+  margin-bottom: 30px;
 }

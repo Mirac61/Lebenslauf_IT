@@ -1,53 +1,49 @@
-// Kurzhilfen
-const $ = (s, c=document) => c.querySelector(s);
-const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
-
-/* === Theme-Umschaltung === */
+// Dunkel-/Hellmodus-Umschaltung beim Laden
 (() => {
-  const KEY = 'theme';
-  const knopf = $('#themaKnopf');
+  const KEY = "theme";
+  const knopf = document.getElementById("themaKnopf");
   const root = document.documentElement;
   const gespe = localStorage.getItem(KEY);
-  const dunkel = matchMedia('(prefers-color-scheme: dark)').matches;
-  const start = gespe || (dunkel ? 'dark' : 'light');
+  const dunkel = matchMedia("(prefers-color-scheme: dark)").matches;
+  const start = gespe || (dunkel ? "dark" : "light");
 
-  root.setAttribute('data-theme', start);
-  if (knopf) knopf.textContent = start === 'dark' ? '🔆' : '🌓';
+  root.setAttribute("data-theme", start);
+  if (knopf) knopf.textContent = start === "dark" ? "🔆" : "🌓";
 
-  knopf?.addEventListener('click', () => {
-    const neu = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', neu);
+  // Theme per Button wechseln und speichern
+  knopf?.addEventListener("click", () => {
+    const neu = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", neu);
     localStorage.setItem(KEY, neu);
-    knopf.textContent = neu === 'dark' ? '🔆' : '🌓';
+    knopf.textContent = neu === "dark" ? "🔆" : "🌓";
   });
 })();
 
-/* === Projektfilter === */
-(() => {
-  const input = $('#projektFilter');
-  const items = $$('.projekt');
-  if (!input || !items.length) return;
+// Abschnitte ein-/ausblenden
+document.querySelectorAll("[data-toggle]").forEach(btn => {
 
-  const norm = s => (s || '').toLowerCase();
-  input.addEventListener('input', () => {
-    const q = norm(input.value);
-    items.forEach(el => {
-      const text = norm(el.textContent);
-      const tags = norm(el.dataset.tags);
-      el.style.display = (!q || text.includes(q) || tags.includes(q)) ? '' : 'none';
-    });
-  });
-})();
+  // sucht das Element, auf das der data-toggle-Selektor des Buttons zeigt
+  const target = document.querySelector(btn.getAttribute("data-toggle"));
 
-/* === Anzeigen / Ausblenden === */
-(() => {
-  $$('[data-toggle]').forEach(k => {
-    k.addEventListener('click', () => {
-      const ziel = $(k.dataset.toggle);
-      if (!ziel) return;
-      const versteckt = ziel.classList.toggle('versteckt');
-      k.textContent = versteckt ? 'Anzeigen' : 'Ausblenden';
-      k.setAttribute('aria-expanded', String(!versteckt));
-    });
+  if (!target) return;
+  btn.addEventListener("click", () => {
+    const hidden = target.classList.toggle("versteckt");
+    btn.setAttribute("aria-expanded", !hidden);
+    btn.textContent = hidden ? "Einblenden" : "Ausblenden";
   });
-})();
+});
+
+// Projekte filtern
+const filter = document.getElementById("projektFilter");
+
+ filter?.addEventListener("input", e => {
+
+  const term = e.target.value.toLowerCase(); // Eingabetext in Kleinbuchstaben holen
+
+   // Geht alle Projekte durch und zeigt nur die an, deren Tags den Suchbegriff enthalten
+  document.querySelectorAll(".projekt").forEach(p => {
+    const tags = (p.dataset.tags || "").toLowerCase();
+    p.style.display = tags.includes(term) ? "block" : "none";
+  });
+
+});
