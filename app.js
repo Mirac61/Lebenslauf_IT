@@ -1,20 +1,17 @@
 // Dunkel-/Hellmodus-Umschaltung beim Laden
+// Theme-Umschaltung (ohne localStorage für die Übung)
 (() => {
-  const KEY = "theme";
   const knopf = document.getElementById("themaKnopf");
   const root = document.documentElement;
-  const gespe = localStorage.getItem(KEY);
   const dunkel = matchMedia("(prefers-color-scheme: dark)").matches;
-  const start = gespe || (dunkel ? "dark" : "light");
+  const start = dunkel ? "dark" : "light";
 
   root.setAttribute("data-theme", start);
   if (knopf) knopf.textContent = start === "dark" ? "🔆" : "🌓";
 
-  // Theme per Button wechseln und speichern
   knopf?.addEventListener("click", () => {
     const neu = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
     root.setAttribute("data-theme", neu);
-    localStorage.setItem(KEY, neu);
     knopf.textContent = neu === "dark" ? "🔆" : "🌓";
   });
 })();

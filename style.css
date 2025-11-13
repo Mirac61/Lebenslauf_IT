@@ -6,25 +6,43 @@
   --akzent: #667eea;
   --radius: 14px;
   --abstand: 20px;
-  --t: 0.25s ease;
-  --page-bg: linear-gradient(180deg, #f7f7f7 0%, #f0e8dc 100%);
+  --trans: 0.25s ease;
+  --gradient: linear-gradient(180deg, #f7f7f7 0%, #f0e8dc 100%);
   --surface: rgba(255, 255, 255, 0.5);
+  --akzent-light: rgba(102, 126, 234, 0.08);
 }
 
 /* Vordefinition für das Dark Theme */
 html[data-theme="dark"] {
-  --page-bg: linear-gradient(180deg, #0f0f13 0%, #1a2238 100%);
+  --gradient: linear-gradient(180deg, #0f0f13 0%, #1a2238 100%);
   --surface: rgba(21, 24, 30, 0.49);
   --text: #e5e5e5;
   --grau: #a0aec0;
   --rand: #2a2f36;
   --akzent: #8da2fb;
+  --akzent-light: rgba(141, 162, 251, 0.08);
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    /* !important überschreibt alle anderen Regeln */
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 /* Das Grunddesign für alle Elemente */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-img { max-width: 100%; display: block; }
+img {
+  max-width: 100%;
+  display: block;
+}
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
@@ -32,11 +50,16 @@ body {
   min-height: 100vh;
   padding: 24px;
   color: var(--text);
-  background: var(--page-bg);
-  transition: background .25s ease, color .25s ease; /* weiches Umschalten */
+  background: var(--gradient);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease; /* weiches Umschalten */
 }
 
-.hülle { max-width: 1100px; margin: auto; }
+.hülle {
+  max-width: 1100px;
+  margin: auto;
+}
 
 .gitter {
   display: grid;
@@ -46,27 +69,37 @@ body {
     "bildung faehig"
     "sprachen projekte";
 }
-@media (max-width:900px){
+@media (max-width: 900px) {
   .gitter {
     grid-template-areas: "bildung" "faehig" "sprachen" "projekte";
     grid-template-columns: 1fr;
   }
 }
-.feld--bildung { grid-area: bildung; }
-.feld--faehig  { grid-area: faehig; }
-.feld--sprachen{ grid-area: sprachen; }
-.feld--projekte{ grid-area: projekte; }
+.feld--bildung {
+  grid-area: bildung;
+}
+.feld--faehig {
+  grid-area: faehig;
+}
+.feld--sprachen {
+  grid-area: sprachen;
+}
+.feld--projekte {
+  grid-area: projekte;
+}
 
 .box {
   background: var(--surface);
   border: 1px solid var(--rand);
   border-radius: var(--radius);
   padding: 24px;
-  transition: transform var(--t), border-color var(--t);
+  transition:
+    transform var(--trans),
+    border-color var(--trans);
 }
 .box:hover {
   transform: translateY(-2px); /*hebt die Box leicht an*/
-  border-color: color-mix(in srgb, var(--rand), var(--akzent) 30%);
+  border-color: var(--akzent);
 }
 
 .knopf {
@@ -78,10 +111,13 @@ body {
   color: var(--text);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color var(--t), border-color var(--t), transform var(--t);
+  transition:
+    background-color var(--trans),
+    border-color var(--trans),
+    transform var(--trans);
 }
 .knopf:hover {
-  background: color-mix(in srgb, var(--surface), var(--akzent) 10%);
+  background: var(--akzent-light);
   transform: translateY(-1px);
 }
 .knopf--akzent {
@@ -89,7 +125,9 @@ body {
   border-color: var(--akzent);
   color: #fff;
 }
-.knopf--akzent:hover { filter: brightness(0.95); }
+.knopf--akzent:hover {
+  background: #5a6dd4;
+}
 
 .eingabe {
   width: 100%;
@@ -99,9 +137,11 @@ body {
   background: var(--surface);
   color: var(--text);
   outline: none;
-  transition: border-color var(--t);
+  transition: border-color var(--trans);
 }
-.eingabe:focus { border-color: var(--akzent); }
+.eingabe:focus {
+  border-color: var(--akzent);
+}
 
 .marken {
   display: flex;
@@ -116,11 +156,14 @@ body {
   background: var(--surface);
   color: var(--text);
   text-decoration: none; /* Unterstrich entfernen */
-  transition: background-color var(--t), border-color var(--t), color var(--t);
+  transition:
+    background-color var(--trans),
+    border-color var(--trans),
+    color var(--trans);
 }
 
 .marke:hover {
-  background: color-mix(in srgb, var(--surface), var(--akzent) 15%);
+  background: var(--akzent-light);
   border-color: var(--akzent);
   color: var(--akzent);
 }
@@ -131,7 +174,9 @@ body {
   padding-left: 12px;
   border-left: 4px solid var(--akzent);
 }
-.blass { color: var(--grau); }
+.blass {
+  color: var(--grau);
+}
 
 .liste {
   list-style: none;
@@ -140,8 +185,13 @@ body {
   padding-left: 0;
   margin-top: 12px;
 }
-.ltitel { font-weight: 600; }
-.ltext { color: var(--grau); font-size: 14px; }
+.ltitel {
+  font-weight: 600;
+}
+.ltext {
+  color: var(--grau);
+  font-size: 14px;
+}
 
 .projekt {
   display: block;
@@ -151,12 +201,15 @@ body {
   background: var(--surface);
   color: var(--text);
   text-decoration: none;
-  transition: transform var(--t), border-color var(--t), background-color var(--t);
+  transition:
+    transform var(--trans),
+    border-color var(--trans),
+    background-color var(--trans);
 }
 .projekt:hover {
   transform: translateX(6px);
   border-color: var(--akzent);
-  background: color-mix(in srgb, var(--surface), var(--akzent) 8%);
+  background: var(--akzent-light);
 }
 
 .fuß {
@@ -167,46 +220,55 @@ body {
 }
 
 .header-row {
-  display:flex;
-  gap:20px;
-  justify-content:space-between;
-  align-items:flex-start;
-  flex-wrap:wrap;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
-.header-name h1 { font-size:40px; letter-spacing:-.5px; margin:0 0 6px; }
-.header-name .blass { margin:0; }
+
+.header-name h1 {
+  font-size: 40px;
+  letter-spacing: -0.5px;
+  margin: 0 0 6px; /*margin-bottom = 6px*/
+}
+
+.header-name .blass {
+  margin: 0;
+}
 
 .section-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
-.section-head .titel { margin-bottom:0; }
+.section-head .titel {
+  margin-bottom: 0;
+}
 
-.mt-12 { margin-top:12px; }
-.projekte-grid { display:grid; gap:12px; margin-top:12px; }
+.projekte-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
 
 .visually-hidden {
-  position:absolute!important;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0 0 0 0);
-  white-space:nowrap;
-  border:0;
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
 }
 
-.versteckt { display: none !important; }
-
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+.versteckt {
+  display: none !important;
 }
 
-/* Abstand zwischen Kopf und erstem Abschnitt */
 header.box {
   margin-bottom: 30px;
 }
