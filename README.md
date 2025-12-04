@@ -1,5 +1,3 @@
-<img width="1496" height="860" alt="image" src="https://github.com/user-attachments/assets/0583d385-b152-489d-9407-6965d8c65910" />
-
 
 # Interaktiver Lebenslauf
 
@@ -14,4 +12,7 @@ Fokus: sauberes Developer(Apple)-Design, klare Struktur und ein ruhiges UI.
 
 ## Tech Stack
 HTML · CSS · JavaScript
+
+
+<img width="1496" height="860" alt="image" src="https://github.com/user-attachments/assets/0583d385-b152-489d-9407-6965d8c65910" />
 
